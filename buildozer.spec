@@ -4,6 +4,7 @@ package.name = marifin
 package.domain = org.iq.marifin
 source.dir = .
 source.include_exts = py,png,jpg,ttf,kv,db
+source.include_patterns = fonts/*.ttf
 version = 1.0
 
 # المتطلبات — انتبه: نستخدم pybidi (وليس python-bidi) لأنها تُبنى على أندرويد

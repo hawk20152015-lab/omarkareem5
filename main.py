@@ -61,7 +61,14 @@ def ar(text):
 # تسجيل خط عربي بمسار مطلق (يعمل على أندرويد وأي مجلد عمل).
 # نسجّله مرة باسم "Arabic" ومرة نتجاوز به أنماط KivyMD لاحقاً.
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_FONT_DIR = os.path.join(_HERE, "fonts")
+# على أندرويد قد يختلف مسار العمل، لذا نجرّب عدة أماكن للعثور على الخط
+_FONT_DIRS = [
+    os.path.join(_HERE, "fonts"),
+    os.path.join(os.getcwd(), "fonts"),
+    "fonts",
+    _HERE,
+    os.getcwd(),
+]
 
 # (الملف العادي، الملف العريض)
 # Amiri أولاً: يغطي أشكال العرض العربية كاملة المطلوبة لمكتبة arabic_reshaper.
@@ -74,14 +81,17 @@ _FONT_CANDIDATES = [
 ]
 
 ARABIC_FONT = "Roboto"
-for _reg, _bold in _FONT_CANDIDATES:
-    _rp = os.path.join(_FONT_DIR, _reg)
-    if os.path.exists(_rp):
-        _bp = os.path.join(_FONT_DIR, _bold) if _bold else None
-        if not (_bp and os.path.exists(_bp)):
-            _bp = _rp
-        LabelBase.register(name="Arabic", fn_regular=_rp, fn_bold=_bp)
-        ARABIC_FONT = "Arabic"
+for _dir in _FONT_DIRS:
+    for _reg, _bold in _FONT_CANDIDATES:
+        _rp = os.path.join(_dir, _reg)
+        if os.path.exists(_rp):
+            _bp = os.path.join(_dir, _bold) if _bold else None
+            if not (_bp and os.path.exists(_bp)):
+                _bp = _rp
+            LabelBase.register(name="Arabic", fn_regular=_rp, fn_bold=_bp)
+            ARABIC_FONT = "Arabic"
+            break
+    if ARABIC_FONT == "Arabic":
         break
 
 
