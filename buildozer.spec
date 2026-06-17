@@ -24,6 +24,9 @@ android.archs = arm64-v8a, armeabi-v7a
 android.api = 34
 android.minapi = 21
 
+# تثبيت إصدار NDK المتوافق مع أدوات البناء المثبّتة
+android.ndk = 25b
+
 # قبول تراخيص SDK تلقائياً (مفيد للبناء بلا تدخّل)
 android.accept_sdk_license = True
 
