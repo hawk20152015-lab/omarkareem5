@@ -29,12 +29,7 @@ from kivymd.uix.card import MDCard
 from kivymd.uix.boxlayout import MDBoxLayout
 
 import arabic_reshaper
-try:
-    # سطح المكتب: حزمة python-bidi
-    from bidi.algorithm import get_display
-except ImportError:
-    # أندرويد: نستخدم pybidi (تُبنى بنجاح عبر buildozer)
-    from pybidi.algorithm import get_display
+from bidi.algorithm import get_display
 
 from database import Database
 

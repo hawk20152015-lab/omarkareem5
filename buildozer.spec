@@ -7,7 +7,7 @@ source.include_exts = py,png,jpg,ttf,kv,db
 version = 1.0
 
 # المتطلبات — انتبه: نستخدم pybidi (وليس python-bidi) لأنها تُبنى على أندرويد
-requirements = python3,kivy==2.3.0,kivymd==1.1.1,sqlite3,arabic-reshaper,pybidi
+requirements = python3,kivy==2.3.0,kivymd==1.1.1,sqlite3,arabic-reshaper,python-bidi==0.4.2
 
 orientation = portrait
 fullscreen = 0
