@@ -176,6 +176,18 @@ class ArabicInput(MDTextField):
         self.text = ""
 
 
+class TapField(ArabicInput):
+    """حقل للعرض فقط يفتح قائمة عند النقر عليه (يعمل على أندرويد حيث لا يعمل on_focus)."""
+    tap_open = ObjectProperty(None, allownone=True)
+
+    def on_touch_down(self, touch):
+        if self.collide_point(*touch.pos):
+            if self.tap_open:
+                self.tap_open(self)
+            return True
+        return super().on_touch_down(touch)
+
+
 # ======================================================================
 #  بطاقة عنصر في القائمة (مؤسسة / فرد) — تحكم كامل بالخط والاتجاه
 # ======================================================================
@@ -451,12 +463,12 @@ KV = '''
             adaptive_height: True
             pos_hint: {"top": 1}
 
-            ArabicInput:
+            TapField:
                 id: gov_field
                 hint_text: app.ar("المحافظة")
                 mode: "rectangle"
                 readonly: True
-                on_focus: if self.focus: app.open_gov_menu(self)
+                tap_open: app.open_gov_menu
 
             ArabicInput:
                 id: district_field
@@ -488,19 +500,19 @@ KV = '''
                 spacing: dp(18)
                 adaptive_height: True
 
-                ArabicInput:
+                TapField:
                     id: ind_gov_field
                     hint_text: app.ar("المحافظة")
                     mode: "rectangle"
                     readonly: True
-                    on_focus: if self.focus: app.open_ind_gov_menu(self)
+                    tap_open: app.open_ind_gov_menu
 
-                ArabicInput:
+                TapField:
                     id: ind_inst_field
                     hint_text: app.ar("المؤسسة")
                     mode: "rectangle"
                     readonly: True
-                    on_focus: if self.focus: app.open_ind_inst_menu(self)
+                    tap_open: app.open_ind_inst_menu
 
                 ArabicInput:
                     id: ind_name_field
