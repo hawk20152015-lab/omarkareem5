@@ -30,6 +30,10 @@ android.ndk = 25b
 # قبول تراخيص SDK تلقائياً (مفيد للبناء بلا تدخّل)
 android.accept_sdk_license = True
 
+# إجبار buildozer على استخدام إصدار python-for-android المستقر (يبني Python 3.11)
+# بدل فرع master الذي يبني Python 3.14 غير المتوافق مع Kivy
+p4a.branch = v2024.01.21
+
 [buildozer]
 log_level = 2
 warn_on_root = 1
